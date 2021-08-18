@@ -52,7 +52,7 @@ export default class SwapiService {
         return Number(result)
     }
 
-    _transformPlanet(planet: IPlanet) {
+    _transformPlanet = (planet: IPlanet) => {
         return {
             id: this._extractId(planet),
             url: planet.url,
@@ -63,7 +63,7 @@ export default class SwapiService {
         }
     }
 
-    _transformStarship(starship: IStarship) {
+    _transformStarship = (starship: IStarship) => {
         return {
             id: this._extractId(starship),
             url: starship.url,
@@ -78,7 +78,7 @@ export default class SwapiService {
         }
     }
 
-    _transformPerson(person: IPerson) {
+    _transformPerson = (person: IPerson) => {
         return {
             id: this._extractId(person),
             url: person.url,
