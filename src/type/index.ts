@@ -12,9 +12,9 @@ export interface IPlanet extends IBase{
 }
 
 export interface IPerson extends IBase{
-    gender: number
-    birthYear: number
-    eyeColor: string
+    gender: string
+    birthYear: string | null
+    eyeColor: string | null
 }
 
 export interface IStarship extends IBase{
@@ -22,7 +22,7 @@ export interface IStarship extends IBase{
     manufacturer: string
     costInCredits: string
     length: string
-    crew: number
-    passengers: number
+    crew: string
+    passengers: string
     cargoCapacity: string
 }
