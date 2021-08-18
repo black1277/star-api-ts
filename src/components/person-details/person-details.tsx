@@ -3,14 +3,21 @@ import React, { Component } from 'react'
 import './person-details.css'
 import SwapiService from '../../services/swapi-service'
 import {IPerson} from '../../type'
+import Spinner from "../spinner";
 type DetailProps = {
   personId: null | number
 }
 type DetailState = {
   person: null | IPerson
+  loading: boolean
 }
+
 export default class PersonDetails extends Component<DetailProps, DetailState> {
-  state = { person: null }
+
+  state:DetailState  = {
+    person: null,
+    loading: true
+  }
 
   swapiService = new SwapiService()
 
@@ -20,6 +27,9 @@ export default class PersonDetails extends Component<DetailProps, DetailState> {
 
   componentDidUpdate(prevProps: { personId: number }) {
     if (this.props.personId !== prevProps.personId) {
+      this.setState({
+        loading: true
+      })
       this.updatePerson()
     }
   }
@@ -31,25 +41,20 @@ export default class PersonDetails extends Component<DetailProps, DetailState> {
     }
     this.swapiService
         .getPerson(personId)
-        .then((person) => {
-          this.setState({ person })
+        .then((person: IPerson) => {
+          this.setState({
+            person,
+            loading: false
+          })
         })
   }
 
   render() {
-/*    if (this.state.person === null) {
-      return <span>Select a person from a list</span>;
-    }
-    const { id, name, gender, birthYear, eyeColor } = this.state.person*/
-
-    const { person } = this.state
-    if (person === null) {
+    if (this.state.person === null) {
       return <span>Select a person from a list</span>
     }
-
-    // @ts-ignore
-    const { id, name, gender, birthYear, eyeColor } = person
-
+    const { id, name, gender, birthYear, eyeColor } = this.state.person
+    if(this.state.loading) return <Spinner/>
     return (
         <div className="person-details card">
           <img className="person-image"
