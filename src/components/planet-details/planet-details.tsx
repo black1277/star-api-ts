@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import './planet-details.css';
+import './planet-details.css'
 
 export default class PlanetDetals extends Component {
 

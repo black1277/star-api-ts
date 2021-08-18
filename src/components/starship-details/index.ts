@@ -1,3 +1,3 @@
-import StarshipDetals from "./starship-details";
+import StarshipDetals from './starship-details'
 
 export default StarshipDetals

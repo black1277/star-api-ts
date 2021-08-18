@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import './header.css';
+import './header.css'
 
 const Header: React.FC = () => {
   return (
@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         </li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

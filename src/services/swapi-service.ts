@@ -1,55 +1,55 @@
-import {IPerson, IPlanet, IStarship} from "../type";
+import {IPerson, IPlanet, IStarship} from '../type'
 type Item = IPerson | IPlanet | IStarship
 
 export default class SwapiService {
 
-    _apiBase = 'https://swapi.dev/api';
+    _apiBase = 'https://swapi.dev/api'
 
     async getResource(url: string) {
-        const res = await fetch(`${this._apiBase}${url}`);
+        const res = await fetch(`${this._apiBase}${url}`)
 
         if (!res.ok) {
             throw new Error(`Could not fetch ${url}` +
                 `, received ${res.status}`)
         }
-        return await res.json();
+        return await res.json()
     }
 
     async getAllPeople() {
-        const res = await this.getResource(`/people/`);
-        return res.results.map(this._transformPerson);
+        const res = await this.getResource(`/people/`)
+        return res.results.map(this._transformPerson)
     }
 
     async getPerson(id: number) {
-        const person = await this.getResource(`/people/${id}/`);
-        return this._transformPerson(person);
+        const person = await this.getResource(`/people/${id}/`)
+        return this._transformPerson(person)
     }
 
     async getAllPlanets() {
-        const res = await this.getResource(`/planets/`);
-        return res.results.map(this._transformPlanet);
+        const res = await this.getResource(`/planets/`)
+        return res.results.map(this._transformPlanet)
     }
 
     async getPlanet(id: number) {
-        const planet = await this.getResource(`/planets/${id}/`);
-        return this._transformPlanet(planet);
+        const planet = await this.getResource(`/planets/${id}/`)
+        return this._transformPlanet(planet)
     }
 
     async getAllStarships() {
-        const res = await this.getResource(`/starships/`);
-        return res.results.map(this._transformStarship);
+        const res = await this.getResource(`/starships/`)
+        return res.results.map(this._transformStarship)
     }
 
     async getStarship(id: number) {
-        const starship = await this.getResource(`/starships/${id}/`);
-        return this._transformStarship(starship);
+        const starship = await this.getResource(`/starships/${id}/`)
+        return this._transformStarship(starship)
     }
 
     _extractId(item: Item) {
-        const idRegExp = /\/([0-9]*)\/$/;
+        const idRegExp = /\/([0-9]*)\/$/
         let result = '2'
             if(!Object.is(item.url.match(idRegExp)![1], null)) result = item.url.match(idRegExp)![1]
-        return Number(result);
+        return Number(result)
     }
 
     _transformPlanet(planet: IPlanet) {
@@ -60,7 +60,7 @@ export default class SwapiService {
             population: planet.population,
             rotationPeriod: planet.rotation_period,
             diameter: planet.diameter
-        };
+        }
     }
 
     _transformStarship(starship: IStarship) {
