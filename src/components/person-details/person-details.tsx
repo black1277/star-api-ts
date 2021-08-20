@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-
-import './person-details.css'
-import SwapiService from '../../services/swapi-service'
 import {IPerson} from '../../type'
-import Spinner from "../spinner";
+import Spinner from '../spinner'
+import SwapiService from '../../services/swapi-service'
+import './person-details.css'
+import ErrorButton from '../error-button'
+
 type DetailProps = {
   personId: null | number
 }
@@ -77,6 +78,7 @@ export default class PersonDetails extends Component<DetailProps, DetailState> {
                 <span>{eyeColor}</span>
               </li>
             </ul>
+            <ErrorButton />
           </div>
         </div>
     )

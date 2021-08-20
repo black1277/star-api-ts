@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import Spinner from '../spinner'
-
-import './item-list.css'
 import SwapiService from '../../services/swapi-service'
-import {IPerson} from "../../type";
+import {IPerson} from '../../type'
+import './item-list.css'
 
 type Props = {
-    onItemSelected: (id: number) => void;
+    onItemSelected: (id: number) => void
 }
 
 export default class ItemList extends Component<Props, {}> {
@@ -49,7 +48,3 @@ export default class ItemList extends Component<Props, {}> {
         )
   }
 }
-
-/*ItemList.defaultProps = {
-    onItemSelected: (id: number) =>{}
-}*/
