@@ -1,4 +1,4 @@
-interface IBase {
+export interface IBase {
     id?: number
     name: string
     url: string
