@@ -36,7 +36,7 @@ export default class App extends Component<{}, AppState> {
       return <ErrorIndicator/>
     }
     return (
-      <div>
+      <div className='container'>
         <Header/>
         {planet}
 

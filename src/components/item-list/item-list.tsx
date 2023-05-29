@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import Spinner from '../spinner'
-import { IBase } from '../../type'
+import { IUnion } from '../../type'
 import './item-list.css'
 
-type ItemListProps = {
+type ItemListProps<T> = {
   onItemSelected: (id: number) => void
-  getData: () => Promise<IBase[]>
+  getData: () => Promise<T[]>
+  children: (item: T) => string | React.ReactNode
 }
-type ItemListState = {
-  itemList: null | IBase[]
+type ItemListState<T> = {
+  itemList: null | T[]
 }
 
-export default class ItemList extends Component<ItemListProps, ItemListState> {
+export default class ItemList extends Component<ItemListProps<IUnion>, ItemListState<IUnion>> {
 
-  state: ItemListState = {
+  state: ItemListState<IUnion> = {
     itemList: null
   }
 
@@ -27,15 +28,18 @@ export default class ItemList extends Component<ItemListProps, ItemListState> {
       })
   }
 
-  renderItems = (arr: IBase[] | null) => {
+  renderItems = <T extends IUnion>(arr:T[]) => {
     if (arr === null) return <Spinner/>
-    return arr.map(({ id, name }) => {
+    const renderLabel = this.props.children
+    return arr.map((item) => {
+      const { id } = item
+      const label = renderLabel(item)
       return (
         <li className="list-group-item"
             key={id}
-            onClick={() => this.props.onItemSelected(id as number)}
+            onClick={() => this.props.onItemSelected(id)}
         >
-          {name}
+          {label}
         </li>
       )
     })

@@ -1,5 +1,5 @@
 export interface IBase {
-    id?: number
+    id: number
     name: string
     url: string
 }
@@ -25,4 +25,12 @@ export interface IStarship extends IBase{
     crew: string
     passengers: string
     cargoCapacity: string
+}
+
+export type IUnion = IPlanet | IPerson | IStarship
+
+type Content = string | React.ReactNode
+export interface IContent {
+  left: Content
+  right: Content
 }

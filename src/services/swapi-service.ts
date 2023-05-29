@@ -5,6 +5,7 @@ type ExBase = IBase & Record<string, string>
 export default class SwapiService {
 
   _apiBase = 'https://swapi.dev/api'
+  _imageBase = 'https://starwars-visualguide.com/assets/img'
 
   getResource = async (url: string) => {
     const res = await fetch(`${this._apiBase}${url}`)
@@ -46,6 +47,12 @@ export default class SwapiService {
     return this._transformStarship(starship)
   }
 
+  getPersonImage = ({id}: IPerson) => `${this._imageBase}/characters/${id}.jpg`
+
+  getStarshipImage = ({id}: IStarship) => `${this._imageBase}/starships/${id}.jpg`
+
+  getPlanetImage = ({id}: IPlanet) => `${this._imageBase}/planets/${id}.jpg`
+
   _extractId = (item: IBase) => {
     const idRegExp = /\/([0-9]*)\/$/
     let result = '2'
@@ -71,11 +78,11 @@ export default class SwapiService {
       name: starship.name,
       model: starship.model,
       manufacturer: starship.manufacturer,
-      costInCredits: starship.costInCredits,
+      costInCredits: starship.cost_in_credits,
       length: starship.length,
       crew: starship.crew,
       passengers: starship.passengers,
-      cargoCapacity: starship.cargoCapacity
+      cargoCapacity: starship.cargo_capacity
     }
   }
 
